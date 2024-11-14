@@ -101,3 +101,24 @@ func (DecimalSerializer) DecObject(d *Decoder, typ reflect.Type, cls *ClassInfo)
 	}
 	return result, nil
 }
+
+type SelfDefClass struct {
+	className string
+	Param     interface{}
+}
+
+type SelfDefClassSerializer struct {
+}
+
+func (p *SelfDefClass) JavaClassName() string {
+	return p.className
+}
+
+func (s SelfDefClassSerializer) EncObject(e *Encoder, v POJO) error {
+	info, _ := v.(*SelfDefClass)
+	return e.Encode(info.Param)
+}
+
+func (SelfDefClassSerializer) DecObject(d *Decoder, typ reflect.Type, cls *ClassInfo) (interface{}, error) {
+	return d.decInstance(typ, cls)
+}
