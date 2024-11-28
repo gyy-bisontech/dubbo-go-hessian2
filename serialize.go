@@ -103,7 +103,7 @@ func (DecimalSerializer) DecObject(d *Decoder, typ reflect.Type, cls *ClassInfo)
 }
 
 type SelfDefClass struct {
-	className string
+	ClassName string
 	Param     interface{}
 }
 
@@ -111,7 +111,7 @@ type SelfDefClassSerializer struct {
 }
 
 func (p *SelfDefClass) JavaClassName() string {
-	return p.className
+	return p.ClassName
 }
 
 func (s SelfDefClassSerializer) EncObject(e *Encoder, v POJO) error {
